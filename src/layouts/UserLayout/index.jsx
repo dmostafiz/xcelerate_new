@@ -7,10 +7,12 @@ import Head from 'next/head';
 export default function UserLayout({ children, title, breads }) {
   const sidebar = useDisclosure();
 
+  const titleText = `${title} | Xcelerate fuel tabs`
+
   return (
     <>
       <Head>
-        <title>{title} | Xcelerate fuel tabs</title>
+        <title>{titleText}</title>
       </Head>
       <Box
         as="section"
