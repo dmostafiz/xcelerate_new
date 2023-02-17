@@ -3,6 +3,16 @@ import React from 'react'
 
 export default function notifications() {
   return (
-    <AdminLayout>notifications</AdminLayout>
+    <AdminLayout
+      title='Notifications'
+      breads={[
+        {
+          title: 'Notifications',
+          link: '/admin/notifications',
+        }
+      ]}
+    >
+      notifications
+    </AdminLayout>
   )
 }

@@ -3,6 +3,16 @@ import React from 'react'
 
 export default function subscriptions() {
   return (
-    <UserLayout>subscriptions</UserLayout>
+    <UserLayout
+      title='Subscriptions'
+      breads={[
+        {
+          title: 'Subscriptions',
+          link: '/user/subscriptions'
+        }
+      ]}
+    >
+      subscriptions
+    </UserLayout>
   )
 }

@@ -3,6 +3,16 @@ import React from 'react'
 
 export default function add() {
   return (
-    <AdminLayout>add</AdminLayout>
+    <AdminLayout
+      title='Add Product'
+      breads={[
+        {
+          title: 'Add Product',
+          link: '/admin/products/add',
+        }
+      ]}
+    >
+      add
+    </AdminLayout>
   )
 }

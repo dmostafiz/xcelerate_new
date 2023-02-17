@@ -3,6 +3,16 @@ import React from 'react'
 
 export default function matrix() {
   return (
-    <AdminLayout>matrix</AdminLayout>
+    <AdminLayout
+      title='Matrix'
+      breads={[
+        {
+          title: 'matrix',
+          link: '/admin/commissions/matrix',
+        }
+      ]}
+    >
+      matrix
+    </AdminLayout>
   )
 }

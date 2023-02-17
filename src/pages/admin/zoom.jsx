@@ -3,6 +3,16 @@ import React from 'react'
 
 export default function zoom() {
   return (
-    <AdminLayout>zoom</AdminLayout>
+    <AdminLayout
+      title='Zoom'
+      breads={[
+        {
+          title: 'Zoom',
+          link: '/admin/zoom',
+        }
+      ]}
+    >
+      zoom
+    </AdminLayout>
   )
 }

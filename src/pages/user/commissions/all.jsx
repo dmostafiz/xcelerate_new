@@ -3,6 +3,16 @@ import React from 'react'
 
 export default function all() {
   return (
-    <UserLayout>all</UserLayout>
+    <UserLayout
+      title='All Commissions'
+      breads={[
+        {
+          title: 'All Commissions',
+          link: '/user/commissions/all',
+        }
+      ]}
+    >
+      all
+    </UserLayout>
   )
 }

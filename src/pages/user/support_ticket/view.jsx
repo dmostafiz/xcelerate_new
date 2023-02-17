@@ -3,6 +3,16 @@ import React from 'react'
 
 export default function view() {
   return (
-    <UserLayout>view</UserLayout>
+    <UserLayout
+      title='View Ticket'
+      breads={[
+        {
+          title: 'View Ticket',
+          link: '/user/support_ticket/view',
+        }
+      ]}
+    >
+      view
+    </UserLayout>
   )
 }

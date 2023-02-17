@@ -3,6 +3,16 @@ import React from 'react'
 
 export default function all() {
   return (
-    <AdminLayout>all</AdminLayout>
+    <AdminLayout
+      title='Subscriptions'
+      breads={[
+        {
+          title: 'Subscriptions',
+          link: '/admin/subscriptions/all',
+        }
+      ]}
+    >
+      all
+    </AdminLayout>
   )
 }

@@ -3,6 +3,16 @@ import React from 'react'
 
 export default function shop() {
   return (
-    <UserLayout>shop</UserLayout>
+    <UserLayout
+    title='Order Products'
+    breads={[
+      {
+        title: 'Order Products',
+        link: '/user/shop'
+      }
+    ]}
+    >
+      shop
+    </UserLayout>
   )
 }

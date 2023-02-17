@@ -3,6 +3,16 @@ import React from 'react'
 
 export default function pending() {
   return (
-    <AdminLayout>pending</AdminLayout>
+    <AdminLayout
+      title='Pending Payouts'
+      breads={[
+        {
+          title: 'Pending Payouts',
+          link: '/admin/payouts/pending',
+        }
+      ]}
+    >
+      pending
+    </AdminLayout>
   )
 }

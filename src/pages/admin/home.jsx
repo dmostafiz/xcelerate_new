@@ -3,7 +3,15 @@ import React from 'react'
 
 export default function index() {
   return (
-    <AdminLayout>
+    <AdminLayout
+      title='Home'
+      breads={[
+        {
+          title: 'Dashboard',
+          link: '/admin/dashboard',
+        }
+      ]}
+    >
       index
     </AdminLayout>
   )

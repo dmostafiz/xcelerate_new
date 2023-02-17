@@ -90,8 +90,8 @@ export default function Sidebar(props) {
                         icon={HiCode}
                         title='Personals'
                         submenus={[
-                            { title: 'Member Sponsor List', link: '/home/products/labels', show: true },
-                            { title: 'Retail Sponsor List', link: '/home/products', show: true },
+                            { title: 'Member Sponsor List', link: '/user/personals/member_sponsor_list', show: true },
+                            { title: 'Retail Sponsor List', link: '/user/personals/retail_sponsor_list', show: true },
                         ]}
                     />
 

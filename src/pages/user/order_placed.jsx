@@ -3,6 +3,16 @@ import React from 'react'
 
 export default function order_placed() {
   return (
-    <UserLayout>order_placed</UserLayout>
+    <UserLayout
+      title='Order Placed'
+      breads={[
+        {
+          title: 'Order Placed',
+          link: '/user/order_placed'
+        }
+      ]}
+    >
+      order_placed
+    </UserLayout>
   )
 }
