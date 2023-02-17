@@ -34,7 +34,7 @@ export default function TopNav({ sidebar, title = '', breads = [] }) {
 
             <Flex alignItems={'center'} justify='space-between' w='full' gap={20}>
 
-                <Box>
+                <Box pl={{base: 8, md: 0}}>
                     <Heading as='h6' fontSize={'md'}>{title}</Heading>
                     {breads.length > 0 && <Breadcrumps breads={breads} />}
                 </Box>
