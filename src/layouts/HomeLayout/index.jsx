@@ -15,9 +15,7 @@ export default function HomeLayout({ children }) {
         JsLoader("/xcelerate-landing/js/jquery.js")
         JsLoader("/xcelerate-landing/js/bootstrap.min.js")
         JsLoader("/xcelerate-landing/js/swiper-bundle.min.js")
-        setTimeout(() => {
-            JsLoader("/xcelerate-landing/js/custom.js")
-        }, 1)
+        JsLoader("/xcelerate-landing/js/custom.js")
     }
 
     useEffect(() => {
