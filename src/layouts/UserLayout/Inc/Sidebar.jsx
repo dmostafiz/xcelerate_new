@@ -1,4 +1,5 @@
 import MenuItem from '@/Components/Common/Dashboard/Sidebar/MenuItem'
+import UserCard from '@/Components/Common/Dashboard/Sidebar/UserCard'
 import LogoMain from '@/Components/Common/LogoMain'
 import { Avatar, Box, Button, Flex, Heading, HStack, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
@@ -8,6 +9,7 @@ import { HiCode, HiCollection } from 'react-icons/hi'
 import { MdContactPhone, MdContacts, MdHome } from 'react-icons/md'
 
 export default function Sidebar(props) {
+    
     return (
         <Box
             as="nav"
@@ -20,6 +22,7 @@ export default function Sidebar(props) {
             overflowX="hidden"
             overflowY="auto"
             bg="#004453"
+            shadow={'md'}
             borderColor="blackAlpha.300"
             borderRightWidth="1px"
             w="60"
@@ -32,27 +35,9 @@ export default function Sidebar(props) {
                 </Box>
             </Flex>
             <Box pt={14}>
-                <Box py={4} mb={5} bg='whiteAlpha.100' shadow='sm'>
-                    <VStack direction={'column'}>
-                        <Avatar
-                            ml="4"
-                            size="md"
-                            name="anubra266"
-                            src="https://avatars.githubusercontent.com/u/30869823?v=4"
-                            cursor="pointer"
-                        />
-                        <Box textAlign={'center'}>
-                            <Heading as='h6' size='sm' color='white'>
-                                Mr. Robinhood
-                            </Heading>
-                            <Text fontSize={'xs'} color='whiteAlpha.700'>~robinhood</Text>
-                        </Box>
-                        <HStack pt={2}>
-                            <Button colorScheme={'teal'} size='xs' rounded={'none'}>My Profile</Button>
-                            <Button colorScheme={'yellow'} bg='yellow.500' size='xs' rounded={'none'}>Logout</Button>
-                        </HStack>
-                    </VStack>
-                </Box>
+                
+                <UserCard />
+                
                 <Flex
                     direction="column"
                     as="nav"

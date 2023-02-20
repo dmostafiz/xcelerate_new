@@ -5,6 +5,7 @@ import Script from 'next/script'
 import dynamic from 'next/dynamic'
 import JsLoader from '@/Helpers/JsLoader'
 import Navbar from './Inc/Navbar'
+import ScriptComponent from './ScriptComponent'
 // const ScriptComponent = dynamic(() => import('@/layouts/HomeLayout/ScriptComponent'), {
 //     ssr: false
 // })
@@ -78,7 +79,7 @@ export default function HomeLayout({ children }) {
                 </footer>
                 {/* End Footer */}
 
-                {/* <ScriptComponent /> */}
+                <ScriptComponent />
             </div>
         </>
     )

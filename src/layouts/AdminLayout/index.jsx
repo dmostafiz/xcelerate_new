@@ -3,13 +3,14 @@ import React from 'react'
 import TopNav from './Inc/TopNav';
 import Sidebar from './Inc/Sidebar';
 import Head from 'next/head';
+import AdminDashboardWrapper from '@/Wrappers/Auth/AdminDashboardWrapper';
 
 export default function AdminLayout({ children, title, breads }) {
   const sidebar = useDisclosure();
   const titleText = `${title} | Xcelerate fuel tabs`
 
   return (
-    <>
+    <AdminDashboardWrapper>
       <Head>
         <title>{titleText}</title>
       </Head>
@@ -53,7 +54,7 @@ export default function AdminLayout({ children, title, breads }) {
           </Box>
         </Box>
       </Box>
-    </>
+    </AdminDashboardWrapper>
   );
 }
 

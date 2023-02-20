@@ -30,7 +30,7 @@ export default function MenuItem({ icon, title, link = '#', submenus = [] }) {
 
                     </Submenu>
                 </>
-                : <Link href={link}>
+                : <Link href={link} shallow={true}>
                     <NavItem routes={[link]} icon={icon}>{title}</NavItem>
                 </Link>}
         </>

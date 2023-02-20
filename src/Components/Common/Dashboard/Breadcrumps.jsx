@@ -15,7 +15,7 @@ export default function Breadcrumps({breads = []}) {
                 </BreadcrumbItem>
                 {breads.map((item, index) => <BreadcrumbItem key={index} isCurrentPage={breads.length == (index + 1)}>
                     <Link href={item.link}>
-                        <BreadcrumbLink as={'p'} href={item.link}>{item.title}</BreadcrumbLink>
+                        <BreadcrumbLink noOfLines={1} as={'p'} href={item.link}>{item.title}</BreadcrumbLink>
                     </Link>
                 </BreadcrumbItem>)}
             </Breadcrumb>}

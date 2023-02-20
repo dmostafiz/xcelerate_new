@@ -3,6 +3,7 @@ import React from 'react'
 import TopNav from './Inc/TopNav';
 import Sidebar from './Inc/Sidebar';
 import Head from 'next/head';
+import UserDashboardWrapper from '@/Wrappers/Auth/UserDashboardWrapper';
 
 export default function UserLayout({ children, title, breads }) {
   const sidebar = useDisclosure();
@@ -10,13 +11,13 @@ export default function UserLayout({ children, title, breads }) {
   const titleText = `${title} | Xcelerate fuel tabs`
 
   return (
-    <>
+    <UserDashboardWrapper>
       <Head>
         <title>{titleText}</title>
       </Head>
       <Box
         as="section"
-        bg="gray.50"
+        bg="#00455312"
         _dark={{
           bg: "gray.700",
         }}
@@ -47,14 +48,14 @@ export default function UserLayout({ children, title, breads }) {
         // transition=".3s ease"
         >
           <TopNav sidebar={sidebar} title={title} breads={breads} />
-          <Box as="main" p="4">
+          <Box as="main">
             {/* Add content here, remove div below  */}
             {/* <Box borderWidth="4px" borderStyle="dashed" rounded="md" h="96" /> */}
             {children}
           </Box>
         </Box>
       </Box>
-    </>
+    </UserDashboardWrapper>
   );
 }
 

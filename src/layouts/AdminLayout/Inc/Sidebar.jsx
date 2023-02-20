@@ -1,4 +1,5 @@
 import MenuItem from '@/Components/Common/Dashboard/Sidebar/MenuItem'
+import UserCard from '@/Components/Common/Dashboard/Sidebar/UserCard'
 import LogoMain from '@/Components/Common/LogoMain'
 import { Avatar, Box, Button, Flex, Heading, HStack, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
@@ -35,27 +36,9 @@ export default function Sidebar(props) {
             </Flex>
 
             <Box pt={14}>
-                <Box py={4} mb={5} bg='whiteAlpha.100' shadow='sm'>
-                    <VStack direction={'column'}>
-                        <Avatar
-                            ml="4"
-                            size="md"
-                            name="anubra266"
-                            src="https://avatars.githubusercontent.com/u/30869823?v=4"
-                            cursor="pointer"
-                        />
-                        <Box textAlign={'center'}>
-                            <Heading as='h6' size='sm' color='white'>
-                                Super Admin
-                            </Heading>
-                            <Text fontSize={'xs'} color='whiteAlpha.700'>~admin</Text>
-                        </Box>
-                        <HStack pt={2}>
-                            <Button colorScheme={'teal'} size='xs' rounded={'none'}>My Profile</Button>
-                            <Button colorScheme={'yellow'} bg='yellow.500' size='xs' rounded={'none'}>Logout</Button>
-                        </HStack>
-                    </VStack>
-                </Box>
+
+                <UserCard />
+
                 <Flex
                     direction="column"
                     as="nav"
@@ -152,7 +135,7 @@ export default function Sidebar(props) {
                         link='/admin/zoom'
                     />
 
-        
+
                     <MenuItem
                         icon={MdContactSupport}
                         title='Support Tickes'
