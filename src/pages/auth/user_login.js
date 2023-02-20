@@ -21,7 +21,7 @@ import Link from 'next/link';
 
 export default function user_login() {
 
-  const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, googleLoading, fbLoading } = useLogin('/user/home')
+  const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, googleLoading, fbLoading } = useLogin('/user/home', 'user')
 
   return (
     <IfUserLoggedIn>

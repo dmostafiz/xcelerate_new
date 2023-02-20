@@ -21,7 +21,7 @@ import Link from 'next/link';
 
 export default function admin_login() {
 
-  const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, googleLoading, fbLoading } = useLogin('/admin/home')
+  const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, googleLoading, fbLoading } = useLogin('/admin/home', 'admin')
 
   return (
     <IfAdminLoggedIn>

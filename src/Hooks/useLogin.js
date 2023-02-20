@@ -17,7 +17,7 @@ const schema = yup.object({
 
 }).required();
 
-export default function useLogin(redirectUrl = null) {
+export default function useLogin(redirectUrl = null, login = 'user') {
 
     const toast = useToast()
     const router = useRouter()
@@ -92,7 +92,7 @@ export default function useLogin(redirectUrl = null) {
 
         console.log('login values sdsd', values)
 
-        const res = await Axios.post(url, values)
+        const res = await Axios.post(url, {...values, user_type:login})
 
         console.log('Response ', res?.data)
 
