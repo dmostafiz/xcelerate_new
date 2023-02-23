@@ -9,10 +9,16 @@ import dynamic from 'next/dynamic'
 import AreaChart from '@/Components/Common/Dashboard/Charts/AreaChart'
 import { Carousel } from '@mantine/carousel'
 import { ProductCard } from '@/Components/Common/Dashboard/Products/ProductCard'
+import useSWR from 'swr'
+import fetcher from '@/Helpers/fetcher'
 
 const PieChart = dynamic(() => import('@/Components/Common/Dashboard/Charts/PieChart'), { ssr: false })
 
 export default function index() {
+
+  const { data, error, isLoading, mutate } = useSWR('/shop/products', fetcher)
+
+
   return (
     <UserLayout
       title='Home'
@@ -464,21 +470,17 @@ export default function index() {
               <Carousel
                 withIndicators
                 // height={250}
-                slideSize={{base: '100%', lg:"33.333333%"}}
+                slideSize={ "33.333333%"}
                 slideGap="md"
                 loop
                 align="start"
-                slidesToScroll={{base:1, md:3}}
+                slidesToScroll={3}
               >
-                <Carousel.Slide>
-                  <ProductCard />
-                </Carousel.Slide>
-                <Carousel.Slide>
-                  <ProductCard />
-                </Carousel.Slide>   
-                <Carousel.Slide>
-                  <ProductCard />
-                </Carousel.Slide>
+                {data?.products?.map((product, i) =>
+                  <Carousel.Slide key={i}>
+                    <ProductCard product={product} description={false}/>
+                  </Carousel.Slide>
+                )}
                 {/* ...other slides */}
               </Carousel>
             </Box>

@@ -1,6 +1,8 @@
+import { CartContext } from '@/Contexts/CartContext';
 import { Box } from '@chakra-ui/react';
 import { Card, Image, Text, Group, Badge, createStyles, Center, Button } from '@mantine/core';
 import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons';
+import { useContext } from 'react';
 
 const useStyles = createStyles((theme) => ({
     card: {
@@ -44,8 +46,11 @@ const mockdata = [
     { label: 'Electric', icon: IconGasStation },
 ];
 
-export function ProductCard() {
+export function ProductCard({ product, description=true }) {
     const { classes } = useStyles();
+
+    const { addToCart } = useContext(CartContext)
+
     const features = mockdata.map((feature) => (
         <Center key={feature.label}>
             <feature.icon size={18} className={classes.icon} stroke={1.5} />
@@ -57,18 +62,21 @@ export function ProductCard() {
         <Card withBorder radius="md" className={classes.card}>
             <Card.Section pt={10}>
                 <Center>
-                    <Image width={'120px'} src="https://xceleratefueltabs.com/assets/product_images/20230208135929.png" alt="Tesla Model S" />
+                    <Image width={'120px'} src={product?.image?.url} alt="Tesla Model S" />
                 </Center>
             </Card.Section>
 
             {/* <Group position="apart" my="md"> */}
-                <Box textAlign={'center'} py={3}>
-                    <Text weight={500}>Tesla Model S</Text>
-                    <Text size="xs" color="dimmed">
-                        Free recharge at any station
-                    </Text>
-                </Box>
-                {/* <Badge variant="outline">25% off</Badge> */}
+            <Box textAlign={'center'} py={3}>
+                <Text lineClamp={1} weight={500}>{product?.name}</Text>
+                {description && <Text
+                    size="xs"
+                    color="dimmed"
+                    dangerouslySetInnerHTML={{ __html: product?.description }}
+                >
+                </Text>}
+            </Box>
+            {/* <Badge variant="outline">25% off</Badge> */}
             {/* </Group> */}
 
             {/* <Card.Section className={classes.section} mt="md">
@@ -85,14 +93,14 @@ export function ProductCard() {
                 <Group spacing={30}>
                     <div>
                         <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
-                            $168.00
+                            ${product?.price}
                         </Text>
-                        <Text size="sm" color="dimmed" weight={500} sx={{ lineHeight: 1 }} mt={3}>
+                        {/* <Text size="sm" color="dimmed" weight={500} sx={{ lineHeight: 1 }} mt={3}>
                             per day
-                        </Text>
+                        </Text> */}
                     </div>
 
-                    <Button radius="xl" style={{ flex: 1 }}>
+                    <Button radius="xl" onClick={() => {addToCart(product)}} style={{ flex: 1 }}>
                         Add to cart
                     </Button>
                 </Group>

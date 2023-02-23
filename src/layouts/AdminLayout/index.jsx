@@ -47,7 +47,7 @@ export default function AdminLayout({ children, title, breads }) {
         // transition=".3s ease"
         >
           <TopNav sidebar={sidebar} title={title} breads={breads} />
-          <Box as="main" p="4">
+          <Box as="main">
             {/* Add content here, remove div below  */}
             {/* <Box borderWidth="4px" borderStyle="dashed" rounded="md" h="96" /> */}
             {children}

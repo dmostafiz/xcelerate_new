@@ -6,7 +6,7 @@ const Axios = axios.create({
 })
 
 Axios.defaults.baseURL = process.env.BASE_API
-Axios.defaults.headers.post['Content-Type'] = 'application/json';
+// Axios.defaults.headers.post['Content-Type'] = 'application/json';
 Axios.defaults.headers.common['Authorization'] = `Bearer ${getAccessToken()}`;
 
 

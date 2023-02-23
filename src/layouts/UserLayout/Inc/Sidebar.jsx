@@ -61,7 +61,7 @@ export default function Sidebar(props) {
 
                     <MenuItem
                         icon={HiCollection}
-                        title='Order Products'
+                        title='Xcelerate Shop'
                         link='/user/shop'
                     />
 
