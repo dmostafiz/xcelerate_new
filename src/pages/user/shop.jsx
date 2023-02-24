@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import Axios from '@/Helpers/Axios'
 import fetcher from '@/Helpers/fetcher'
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { Card, CardBody, CardHeader, Heading, Flex, Button, Icon, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Td, Text, Image, Menu, MenuButton, MenuList, MenuItem, Switch, Box } from '@chakra-ui/react'
+import { Card, CardBody, CardHeader, Heading, Flex, Button, Icon, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Td, Text, Image, Menu, MenuButton, MenuList, MenuItem, Switch, Box, SimpleGrid } from '@chakra-ui/react'
 import Link from 'next/link'
 import { BsPlus } from 'react-icons/bs'
 import { FaPencilAlt, FaPlus } from 'react-icons/fa'
@@ -11,7 +11,6 @@ import { HiTrash } from 'react-icons/hi'
 import useSWR from 'swr'
 import SafeArea from '@/Components/Common/Dashboard/SafeArea'
 import { ProductCard } from '@/Components/Common/Dashboard/Products/ProductCard'
-import { SimpleGrid } from '@mantine/core'
 import { CartContext } from '@/Contexts/CartContext'
 
 export default function shop() {
@@ -44,7 +43,7 @@ export default function shop() {
 
             {data?.products?.length ?
 
-              <SimpleGrid cols={4}>
+              <SimpleGrid columns={{base: 1, sm: 2, md: 2, xl:4}} gap={3}>
                 {data?.products?.map((product, i) => <Box key={i}>
                   <ProductCard product={product} description={false}/>
                 </Box>)}
