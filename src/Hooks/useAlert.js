@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function useAlert(
     position = 'top-right',
-    duration = 9000,
+    duration = 2000,
     isClosable = true
 ) {
 

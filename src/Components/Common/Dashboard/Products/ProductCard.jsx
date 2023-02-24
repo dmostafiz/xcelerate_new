@@ -1,6 +1,6 @@
 import { CartContext } from '@/Contexts/CartContext';
-import { Box } from '@chakra-ui/react';
-import { Card, Image, Text, Group, Badge, createStyles, Center, Button } from '@mantine/core';
+import { Box, Button, Image } from '@chakra-ui/react';
+import { Card, Text, Group, Badge, createStyles, Center } from '@mantine/core';
 import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons';
 import { useContext } from 'react';
 
@@ -61,8 +61,8 @@ export function ProductCard({ product, description=true }) {
     return (
         <Card withBorder radius="md" className={classes.card}>
             <Card.Section pt={10}>
-                <Center>
-                    <Image width={'120px'} src={product?.image?.url} alt="Tesla Model S" />
+                <Center h={180}>
+                    <Image objectFit={'cover'} width={'120px'} src={product?.image?.url} alt="Tesla Model S" />
                 </Center>
             </Card.Section>
 
@@ -100,7 +100,7 @@ export function ProductCard({ product, description=true }) {
                         </Text> */}
                     </div>
 
-                    <Button radius="xl" onClick={() => {addToCart(product)}} style={{ flex: 1 }}>
+                    <Button colorScheme={'yellow'} rounded="full" onClick={() => {addToCart(product)}} style={{ flex: 1 }}>
                         Add to cart
                     </Button>
                 </Group>

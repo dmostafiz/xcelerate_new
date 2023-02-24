@@ -46,7 +46,7 @@ export default function shop() {
 
               <SimpleGrid cols={4}>
                 {data?.products?.map((product, i) => <Box key={i}>
-                  <ProductCard product={product}/>
+                  <ProductCard product={product} description={false}/>
                 </Box>)}
 
               </SimpleGrid>

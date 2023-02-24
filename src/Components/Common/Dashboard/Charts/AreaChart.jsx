@@ -72,7 +72,7 @@ export default function AreaChart() {
     return (
         <Chart options={data.options}
             series={data.series}
-            type="area"
+            type="bar"
             width={380}
         />
     )

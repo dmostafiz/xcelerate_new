@@ -1,6 +1,6 @@
 import SafeArea from '@/Components/Common/Dashboard/SafeArea'
 import UserLayout from '@/layouts/UserLayout'
-import { Box, Flex, Link, Stack, chakra, Image, Grid, GridItem, SimpleGrid, Tabs, TabList, Tab, TabPanels, TabPanel, Button, Text, Heading, Center, VStack } from '@chakra-ui/react'
+import { Box, Flex, Link, Stack, chakra, Image, Grid, GridItem, SimpleGrid, Tabs, TabList, Tab, TabPanels, TabPanel, Button, Text, Heading, Center, VStack, useBreakpointValue, Divider } from '@chakra-ui/react'
 import { ActionIcon, CopyButton, Input, Tooltip } from '@mantine/core'
 import { IconBrandTwitter, IconCheck, IconCopy } from '@tabler/icons'
 import React from 'react'
@@ -196,6 +196,7 @@ export default function index() {
 
                   </Input.Wrapper>
 
+                  <Divider my={2} />
 
                   <Input.Wrapper
                     id="input-demo"
@@ -236,6 +237,8 @@ export default function index() {
                     </Button>
                   </Box>
 
+                  <Divider my={2}/>
+
                   <Box>
                     <Text lineHeight={1} fontSize={'15px'} mb={1}>
                       Join our corporate testimonials group for news and updates
@@ -259,6 +262,7 @@ export default function index() {
               <PieChart />
             </Box>
           </Box>
+
           <Box bg='white' shadow={'md'} height='230px' rounded={'xl'}>
             <Box bg='white' shadow={'md'} minHeight='230px' rounded={'xl'}>
               <Box px={4} py={3} borderBottom='2px' borderColor={'gray.200'}>
@@ -266,11 +270,13 @@ export default function index() {
                   Sales Volume <Text as='span' fontSize={'15px'} fontWeight='normal'>( Last month )</Text>
                 </Heading>
               </Box>
-              <Box p={0}>
+              <Box p={0} overflow={'hidden'}>
                 <AreaChart />
               </Box>
             </Box>
           </Box>
+
+
         </SimpleGrid>
 
         {/* <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={5}>
@@ -375,8 +381,8 @@ export default function index() {
         </SimpleGrid> */}
 
 
-        <Grid templateColumns={{ base: '', lg: 'repeat(3, 1fr)' }} gap={4} >
-          <GridItem bg='white' shadow={'md'} minHeight='230px' rounded={'xl'} >
+        <Flex direction={{ base: 'column', lg: 'row' }} gap={5} >
+          <Box flex={1} bg='white' shadow={'md'} minHeight='230px' rounded={'xl'} >
             <Box px={4} py={3} borderBottom='2px' borderColor={'gray.200'}>
               <Heading as='h5' fontSize={'md'}>
                 Business Snapshot <Text as='span' fontSize={'15px'} fontWeight='normal'>( Overall )</Text>
@@ -459,33 +465,46 @@ export default function index() {
 
               </SimpleGrid>
             </Box>
-          </GridItem>
-          <GridItem colSpan={{ base: '', lg: 2 }} bg='white' shadow={'md'} minH='230px' rounded={'xl'}>
+          </Box>
+          <Box w={{ base: '100%', lg: '60%', xl: '66%' }} bg='white' shadow={'md'} minH='230px' rounded={'xl'}>
             <Box px={4} py={3} borderBottom='2px' borderColor={'gray.200'}>
               <Heading as='h5' fontSize={'md'}>
                 Best Sales <Text as='span' fontSize={'15px'} fontWeight='normal'>( Monthly )</Text>
               </Heading>
             </Box>
-            <Box p={2}>
+
+            <Box p={3} overflow={'hidden'}>
               <Carousel
-                withIndicators
+                withIndicators={false}
                 // height={250}
-                slideSize={ "33.333333%"}
+                sx={{ maxWidth: '100%' }}
+                // slideSize={"33.333333%"}
+
+                slideSize={useBreakpointValue({
+                  base: '100%',
+                  md: '50%',
+                  lg: '50%',
+                  xl: '33.333333%'
+                })}
+
+
                 slideGap="md"
                 loop
                 align="start"
-                slidesToScroll={3}
+                slidesToScroll={1}
+              // sx={{ flex: 1 }}
               >
                 {data?.products?.map((product, i) =>
                   <Carousel.Slide key={i}>
-                    <ProductCard product={product} description={false}/>
+                    <ProductCard product={product} description={false} />
                   </Carousel.Slide>
                 )}
                 {/* ...other slides */}
+
               </Carousel>
             </Box>
-          </GridItem>
-        </Grid>
+          </Box>
+        </Flex>
       </SafeArea>
 
     </UserLayout>

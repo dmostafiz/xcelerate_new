@@ -18,7 +18,7 @@ const CartContextProvider = ({ children }) => {
         removeItem,
     } = useCart();
 
-    const {success} = useAlert('top-center')
+    const {success} = useAlert('top-right')
 
     useEffect(() => {
         console.log('Crart Items', items)
