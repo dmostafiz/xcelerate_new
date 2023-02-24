@@ -1,5 +1,5 @@
 import { CartContext } from '@/Contexts/CartContext';
-import { Box, Button, Image } from '@chakra-ui/react';
+import { Box, Button, Flex, Image } from '@chakra-ui/react';
 import { Card, Text, Group, Badge, createStyles, Center } from '@mantine/core';
 import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons';
 import { useContext } from 'react';
@@ -90,7 +90,7 @@ export function ProductCard({ product, description=true }) {
       </Card.Section> */}
 
             <Card.Section className={classes.section}>
-                <Group spacing={30}>
+                <Flex alignItems={'center'} justify={'space-between'} spacing={30} w='100%'>
                     <div>
                         <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
                             ${product?.price}
@@ -100,10 +100,10 @@ export function ProductCard({ product, description=true }) {
                         </Text> */}
                     </div>
 
-                    <Button colorScheme={'yellow'} rounded="full" onClick={() => {addToCart(product)}} style={{ flex: 1 }}>
+                    <Button float={'right'} size={'sm'} colorScheme={'yellow'} rounded="full" onClick={() => {addToCart(product)}}>
                         Add to cart
                     </Button>
-                </Group>
+                </Flex>
             </Card.Section>
         </Card>
     );

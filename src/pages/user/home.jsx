@@ -11,6 +11,7 @@ import { Carousel } from '@mantine/carousel'
 import { ProductCard } from '@/Components/Common/Dashboard/Products/ProductCard'
 import useSWR from 'swr'
 import fetcher from '@/Helpers/fetcher'
+import useUser from '@/Hooks/useUser'
 
 const PieChart = dynamic(() => import('@/Components/Common/Dashboard/Charts/PieChart'), { ssr: false })
 
@@ -18,6 +19,7 @@ export default function index() {
 
   const { data, error, isLoading, mutate } = useSWR('/shop/products', fetcher)
 
+  const {authUser} = useUser()
 
   return (
     <UserLayout
@@ -178,11 +180,11 @@ export default function index() {
                   >
                     <Input
                       // icon={<IconBrandTwitter size={16} />}
-                      value={'https://xceleratefueltabs.com/dmaltais'}
+                      value={`${process.env.DOMAIN}/ref/${authUser?.username}`}
                       readOnly
                       placeholder="Your twitter"
                       rightSection={
-                        <CopyButton value="https://xceleratefueltabs.com/dmaltais" timeout={2000}>
+                        <CopyButton value={`${process.env.DOMAIN}/ref/${authUser?.username}`} timeout={2000}>
                           {({ copied, copy }) => (
                             <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="right">
                               <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
@@ -207,7 +209,7 @@ export default function index() {
                   >
                     <Input
                       // icon={<IconBrandTwitter size={16} />}
-                      value={'https://grabthetab.com/dmaltais'}
+                      value={`https://grabthetab.com/${authUser?.username}`}
                       readOnly
                       placeholder="Your twitter"
                       rightSection={

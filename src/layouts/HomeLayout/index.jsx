@@ -6,24 +6,14 @@ import dynamic from 'next/dynamic'
 import JsLoader from '@/Helpers/JsLoader'
 import Navbar from './Inc/Navbar'
 import ScriptComponent from './ScriptComponent'
+import { Box } from '@chakra-ui/react'
 // const ScriptComponent = dynamic(() => import('@/layouts/HomeLayout/ScriptComponent'), {
 //     ssr: false
 // })
 
-export default function HomeLayout({ children }) {
+export default function HomeLayout({ children, navBg = 'transparent' }) {
 
-    function loadScripts() {
-        JsLoader("/xcelerate-landing/js/jquery.js")
-        JsLoader("/xcelerate-landing/js/bootstrap.min.js")
-        JsLoader("/xcelerate-landing/js/swiper-bundle.min.js")
-        JsLoader("/xcelerate-landing/js/custom.js")
-    }
-
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            loadScripts()
-        }
-    }, [])
+    
     return (
         <>
             <Head>
@@ -37,19 +27,21 @@ export default function HomeLayout({ children }) {
             <div className="main-wrpper">
 
                 {/* Header */}
-                <header>
-                    <div className="container">
-                        <nav className="navbar navbar-expand-sm navbar-light">
-                            <a className="navbar-brand" href="index.html"><img src="/xcelerate-landing/images/logo.png" alt="Logo" /></a>
-                            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#NavbarToggle" aria-controls="NavbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                                <span className="navbar-toggler-icon" />
-                            </button>
-                            <div className="collapse navbar-collapse" id="NavbarToggle">
-                                <Navbar />
-                            </div>
-                        </nav>
-                    </div>
-                </header>
+                <Box pos={'absolute'} w='full' left={0} top='0' zIndex={99}>
+                    <Box bg={navBg} py={3}>
+                        <div className="container">
+                            <nav className="navbar navbar-expand-sm navbar-light">
+                                <a className="navbar-brand" href="/"><img src="/xcelerate-landing/images/logo.png" alt="Logo" /></a>
+                                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#NavbarToggle" aria-controls="NavbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span className="navbar-toggler-icon" />
+                                </button>
+                                <div className="collapse navbar-collapse" id="NavbarToggle">
+                                    <Navbar />
+                                </div>
+                            </nav>
+                        </div>
+                    </Box>
+                </Box>
                 {/* End Header */}
 
 
@@ -80,7 +72,7 @@ export default function HomeLayout({ children }) {
                 {/* End Footer */}
 
                 <ScriptComponent />
-            </div>
+            </div >
         </>
     )
 }
