@@ -151,9 +151,12 @@ export default function calculator() {
                                         <Text>Matrix Commissions</Text>
                                         {matrix.map((item, index) => {
                                             return <Box key={index} bg='white' shadow={'md'} mb={3} p={3}>
-                                                <Flex w='250px' justify={'space-between'}>
+                                                <Flex w='400px' justify={'space-between'}>
                                                     <Box>
                                                         {item.level} ({item.percentage}%)
+                                                    </Box>
+                                                    <Box>
+                                                        ${(item.commission)?.toFixed(2)} +  {(item.matchMatchCommission - item.commission).toFixed(2)}
                                                     </Box>
                                                     <Box>
                                                         ${(item.matchMatchCommission)?.toFixed(2)}
@@ -162,9 +165,12 @@ export default function calculator() {
                                             </Box>
                                         })}
                                         <Box bg='teal' color='white' shadow={'md'} mb={3} p={3}>
-                                            <Flex w='250px' justify={'space-between'}>
+                                            <Flex w='full' justify={'space-between'}>
                                                 <Box>
-                                                    Total
+                                                    Total commissions payable
+                                                </Box>
+                                                <Box>
+                                                    {/* - */}
                                                 </Box>
                                                 <Box>
                                                     ${matrix.reduce((a, b) => a + b.matchMatchCommission, 0)?.toFixed(2)}
@@ -173,7 +179,7 @@ export default function calculator() {
                                         </Box>
                                     </Box>
                                 }
-
+                                {/* 
                                 {match.length > 0 &&
                                     <Box py={5}>
                                         <Text>Mentoring Bonus (Match)</Text>
@@ -200,7 +206,7 @@ export default function calculator() {
                                             </Flex>
                                         </Box>
                                     </Box>
-                                }
+                                } */}
                             </Flex>
                         </Box>
                     </CardBody>
