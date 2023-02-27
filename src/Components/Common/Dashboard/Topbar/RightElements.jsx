@@ -14,7 +14,7 @@ export default function RightElements() {
             <Icon fontSize={'20px'} color="#0f505d" as={BsBell} cursor="pointer" />
             <Icon fontSize={'20px'} color="#0f505d" as={BsEnvelope} cursor="pointer" />
 
-            <CartDrawer />
+            {authUser?.user_type == 'user' && <CartDrawer />}
 
             <Menu>
                 <MenuButton px={0} py={0} bg='' _hover='' _active='' as={Button} rightIcon={<ChevronDownIcon />}>

@@ -110,6 +110,7 @@ export default function Sidebar(props) {
                             { title: 'Matrix', link: '/admin/commissions/matrix', show: true },
                             { title: 'Matrix Match', link: '/admin/commissions/matrix_match', show: true },
                             { title: 'All Commissions', link: '/admin/commissions/all', show: true },
+                            { title: 'Calculator', link: '/admin/commissions/calculator', show: true },
                         ]}
                     />
 

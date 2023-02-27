@@ -9,8 +9,8 @@ export default function Breadcrumps({breads = []}) {
         <>
             {breads.length > 0 && <Breadcrumb  noOfLines={1} spacing='2px' color={'gray.400'} fontSize={{base: '9px', md:'12px'}} separator={<ChevronRightIcon color='gray.400' />}>
                 <BreadcrumbItem>
-                    <Link href='/home'>
-                        <BreadcrumbLink as={'p'} href='/home'>Home</BreadcrumbLink>
+                    <Link href='/user/home'>
+                        <BreadcrumbLink as={'p'} href='/user/home'>Home</BreadcrumbLink>
                     </Link>
                 </BreadcrumbItem>
                 {breads.map((item, index) => <BreadcrumbItem key={index} isCurrentPage={breads.length == (index + 1)}>

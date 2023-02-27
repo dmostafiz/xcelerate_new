@@ -19,7 +19,7 @@ export default function index() {
       <MainSlider />
       {/* End Main Slider */}
       {/* Product */}
-      <ProductSlider />
+      {/* <ProductSlider /> */}
       {/* End Product */}
       {/* QUALITIES */}
       <Qualities />
