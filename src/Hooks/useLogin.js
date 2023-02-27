@@ -86,9 +86,9 @@ export default function useLogin(redirectUrl = null, login = 'user') {
 
     async function submitLoginData(url, values, errorNotify = true) {
 
-        if (redirectUrl) {
-            setRedirectUrl(redirectUrl)
-        }
+        // if (redirectUrl) {
+        //     setRedirectUrl(redirectUrl)
+        // }
 
         console.log('login values sdsd', values)
 
@@ -113,17 +113,16 @@ export default function useLogin(redirectUrl = null, login = 'user') {
 
             // setFlashMessage('success', "ব্লগে আপনাকে স্বাগতম!", "")
 
-            const redirectUrl = getRedirectUrl()
+            const redirectUrlCookie = getRedirectUrl()
 
 
-            if(redirectUrl){
-                return window.location.href = redirectUrl
+            if( redirectUrlCookie ){
+                return window.location.href = redirectUrlCookie
                 // router.push('/home')
-
             }
 
             else{
-                window.location.href = '/home'
+                window.location.href = redirectUrl
                 // router.push('/home')
             }
 

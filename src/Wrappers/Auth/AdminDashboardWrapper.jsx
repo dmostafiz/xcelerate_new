@@ -4,6 +4,8 @@ import React from 'react'
 import ComponentLoader from '@/Components/ComponentLoader'
 import useUser from '@/Hooks/useUser'
 import { removeAccessToken } from '@/Helpers/CookieHelper'
+import Cookies from 'js-cookie'
+import { getRedirectUrl, setAccessToken, setFlashMessage, setRedirectUrl } from '@/Helpers/CookieHelper'
 
 export default function AdminDashboardWrapper({ children }) {
   const router = useRouter()
@@ -11,6 +13,7 @@ export default function AdminDashboardWrapper({ children }) {
 
   if (!isLoading && !authUser || (authUser && authUser.user_type != 'admin')) {
     // removeAccessToken()
+    setRedirectUrl(router.asPath)
     router.push('/auth/admin_login')
   }
 
