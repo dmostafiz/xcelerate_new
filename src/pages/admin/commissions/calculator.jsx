@@ -167,16 +167,18 @@ export default function calculator() {
                                         <Box bg='teal' color='white' shadow={'md'} mb={3} p={3}>
                                             <Flex w='full' justify={'space-between'}>
                                                 <Box>
-                                                    Total commissions payable
+                                                    Level 11 pay's: ${price}
                                                 </Box>
                                                 <Box>
                                                     {/* - */}
                                                 </Box>
                                                 <Box>
-                                                    ${matrix.reduce((a, b) => a + b.matchMatchCommission, 0)?.toFixed(2)}
+                                                    Total commissions paid to up: ${matrix.reduce((a, b) => a + b.matchMatchCommission, 0)?.toFixed(2)}
                                                 </Box>
                                             </Flex>
                                         </Box>
+
+                                
                                     </Box>
                                 }
                                 {/* 
