@@ -156,7 +156,7 @@ export default function calculator() {
                                                         {item.level} ({item.percentage}%)
                                                     </Box>
                                                     <Box>
-                                                        ${(item.commission)?.toFixed(2)} +  {(item.matchMatchCommission - item.commission).toFixed(2)}
+                                                        ${(item.commission)?.toFixed(2)} +  {(item.match)?.toFixed(2)}
                                                     </Box>
                                                     <Box>
                                                         ${(item.matchMatchCommission)?.toFixed(2)}
