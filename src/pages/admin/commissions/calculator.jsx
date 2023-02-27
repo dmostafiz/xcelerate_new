@@ -173,7 +173,7 @@ export default function calculator() {
                                                     {/* - */}
                                                 </Box>
                                                 <Box>
-                                                    Total commissions paid to up: ${matrix.reduce((a, b) => a + b.matchMatchCommission, 0)?.toFixed(2)}
+                                                    Total paid to up: ${matrix.reduce((a, b) => a + b.matchMatchCommission, 0)?.toFixed(2)}
                                                 </Box>
                                             </Flex>
                                         </Box>
