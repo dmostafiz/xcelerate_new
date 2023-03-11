@@ -1,12 +1,14 @@
 import Breadcrumps from '@/Components/Common/Dashboard/Breadcrumps'
 import RightElements from '@/Components/Common/Dashboard/Topbar/RightElements'
+import LogoMain from '@/Components/Common/LogoMain'
 import { Avatar, Flex, IconButton, Input, InputGroup, InputLeftElement, Icon, Box, Heading } from '@chakra-ui/react'
+import Link from 'next/link'
 import React from 'react'
 import { BsFillEnvelopeFill } from 'react-icons/bs'
 import { FaBell } from 'react-icons/fa'
 import { FiMenu, FiSearch } from 'react-icons/fi'
 
-export default function TopNav({ sidebar, title = '', breads = [] }) {
+export default function TopNav({ sidebar, title = '', breads = [], showSidebar }) {
     return (
         <Flex
             as="header"
@@ -34,11 +36,17 @@ export default function TopNav({ sidebar, title = '', breads = [] }) {
             />
 
             <Flex alignItems={'center'} justify='space-between' w='full' gap={20}>
+                {showSidebar == false && <Link href='/user/home'>
+                    <Box w={155}>
+                        <LogoMain src='https://xceleratefueltabs.com/xcelerate-html/images/logo.png' />
+                    </Box>
+                </Link>
+                }
 
-                <Box pl={{base: 5, md: 0}}>
-                    <Heading as='h6' noOfLines={1} fontSize={{base: 'sm', md:'md'}}>{title}</Heading>
+                {showSidebar == true && <Box pl={{ base: 5, md: 0 }}>
+                    <Heading as='h6' noOfLines={1} fontSize={{ base: 'sm', md: 'md' }}>{title}</Heading>
                     {breads.length > 0 && <Breadcrumps breads={breads} />}
-                </Box>
+                </Box>}
 
                 <InputGroup
                     flex={1}

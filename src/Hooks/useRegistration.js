@@ -1,49 +1,13 @@
-import React, { useState } from 'react'
-import Axios from '../Helpers/Axios'
+import React, { useEffect, useState } from 'react'
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import { useToast } from '@chakra-ui/react';
-import { setFlashMessage } from '../Helpers/CookieHelper';
+import { setAccessToken, setFlashMessage } from '../Helpers/CookieHelper';
 import Cookies from 'js-cookie';
+import Axios from '@/Helpers/Axios';
 
-
-const schema = yup.object({
-    email: yup.string()
-        .email("Invalid Email!")
-        .required('Email field is required!')
-        .test(
-            'checkEmailUnique',
-            'The email is already in use',
-            async (value) => {
-                const res = await Axios.post(`/user/check_user_exists`, { by: 'email', value }, {
-                    withCredentials: true,
-                })
-
-                if (res?.data?.ok === true) {
-                    return false
-                }
-
-                return true
-            }
-        ),
-
-    firstName: yup.string()
-        .required('First Name field is required!'),
-
-    lastName: yup.string()
-        .required('Last Name field is required!'),
-
-    password: yup.string()
-        .required('Password field is required!')
-        .min(6, 'Minimum 6 character is allowed'),
-
-    confirmPassword: yup.string()
-        .oneOf([yup.ref('password')], 'Confirm password should be match with new password')
-        .required('Confirm password field is required!')
-
-}).required();
 
 export default function useRegistration() {
 
@@ -53,14 +17,114 @@ export default function useRegistration() {
     const [googleLoading, setGoogleLoading] = useState(false)
     const [fbLoading, setFbLoading] = useState(false)
 
+    const [dial, setDial] = useState(null)
+    const [sponsor, setSponsor] = useState(null)
+
+    const schema = yup.object({
+        username: yup.string()
+            .required('Username is required!')
+            .matches(
+                /^[a-zA-Z0-9_.]*$/u,
+                'Only ( _ ) dash, ( . ) dot and numbers are allowed. White space are not allowed.'
+            )
+            .test(
+                'checkUsernameUnique',
+                'This username is already exists',
+                async (value) => {
+                    const res = await Axios.post(`/auth/check_username_exists`, { username: value }, {
+                        withCredentials: true,
+                    })
+    
+                    if (res?.data?.ok === true) {
+                        return false
+                    }
+    
+                    return true
+                }
+            ),
+    
+        email: yup.string()
+            .email("Invalid Email!")
+            .required('Email field is required!')
+            .test(
+                'checkUsernameUnique',
+                'This email is already exists',
+                async (value) => {
+                    const res = await Axios.post(`/auth/check_email_exists`, { email: value }, {
+                        withCredentials: true,
+                    })
+    
+                    if (res?.data?.ok === true) {
+                        return false
+                    }
+    
+                    return true
+                }
+            ),
+    
+        first_name: yup.string()
+            .required('First name is required!'),
+    
+        last_name: yup.string()
+            .required('Last name is required!'),
+    
+        password: yup.string()
+            .required('Password is required!')
+            .min(6, 'Minimum 6 character is allowed'),
+    
+        confirm_password: yup.string()
+            .oneOf([yup.ref('password')], 'Should match with password')
+            .required('This is required!'),
+    
+        street_one: yup.string()
+            .required('this field is required!'),
+    
+        street_two: yup.string().nullable(),
+    
+        country: yup.string()
+            .required('this field is required!'),
+    
+    
+        state: yup.string()
+            .required('this field is required!'),
+    
+        city: yup.string()
+            .required('this field is required!'),
+    
+        zip_code: yup.string()
+            .required('this field is required!'),
+    
+        phone_number: yup.string()
+            .required('this field is required!')
+            .test(
+                'checkPhoneUnique',
+                'This phone number is already exists',
+                async (value) => {
+                    const phone_number = `+${dial} ${value}`
+                    const res = await Axios.post(`/auth/check_phone_exists`, { phone_number: phone_number }, {
+                        withCredentials: true,
+                    })
+    
+                    if (res?.data?.ok === true) {
+                        return false
+                    }
+    
+                    return true
+                }
+            ),
+    
+    }).required();
+
     const {
         handleSubmit,
         register,
         formState: { errors, isSubmitting },
+        watch
     } = useForm({
         mode: 'onChange',
         resolver: yupResolver(schema)
     })
+
 
     const responseFacebook = async (response) => {
 
@@ -107,19 +171,19 @@ export default function useRegistration() {
 
     async function onSubmit(values) {
         console.log('Form Value', values)
-        await submitRegistrationData('/auth/signUp', values)
+        await submitRegistrationData('/auth/register', values)
     }
 
     const submitRegistrationData = async (url, values) => {
-        const res = await Axios.post(url, { ...values }, {
+        const res = await Axios.post(url, { ...values, dial, sponsor }, {
             // withCredentials: true
         })
 
         // console.log(res)
 
-        if (res?.data.ok == true) {
+        if (res?.data?.ok) {
 
-            Cookies.set('accessToken', res.data.accessToken)
+            setAccessToken(res?.data?.token)
 
             // removeUpdateToken(data.profileUpdateToken)
             // setRedirectUrl(router.asPath)
@@ -133,9 +197,11 @@ export default function useRegistration() {
                 isClosable: true,
             })
 
+            Cookies.remove('sponsor')
+
             setFlashMessage('success', "Congratulations!", "Your registration has done successfull.",)
 
-            window.location.href = '/home/settings/business'
+            window.location.href = '/user/home'
 
             return
 
@@ -151,9 +217,11 @@ export default function useRegistration() {
 
             return
         }
-
     }
 
 
-    return { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, fbLoading, googleLoading }
+
+
+
+    return { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, watch, errors, isSubmitting, fbLoading, googleLoading, dial, setDial, sponsor, setSponsor }
 }

@@ -117,11 +117,15 @@ export default function useLogin(redirectUrl = null, login = 'user') {
 
 
             if( redirectUrlCookie ){
+
+                // alert('has cookie url', redirectUrlCookie)
+
                 return window.location.href = redirectUrlCookie
                 // router.push('/home')
             }
 
             else{
+                // alert('default ', redirectUrl)
                 window.location.href = redirectUrl
                 // router.push('/home')
             }

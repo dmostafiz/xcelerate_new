@@ -1,6 +1,7 @@
 import MenuItem from '@/Components/Common/Dashboard/Sidebar/MenuItem'
 import UserCard from '@/Components/Common/Dashboard/Sidebar/UserCard'
 import LogoMain from '@/Components/Common/LogoMain'
+import useUser from '@/Hooks/useUser'
 import { Avatar, Box, Button, Flex, Heading, HStack, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { BsBell, BsCalendarEvent, BsGearFill } from 'react-icons/bs'
@@ -9,7 +10,9 @@ import { HiCode, HiCollection } from 'react-icons/hi'
 import { MdContactPhone, MdContacts, MdHome } from 'react-icons/md'
 
 export default function Sidebar(props) {
-    
+
+    const { authUser } = useUser()
+
     return (
         <Box
             as="nav"
@@ -35,9 +38,9 @@ export default function Sidebar(props) {
                 </Box>
             </Flex>
             <Box pt={14}>
-                
+
                 <UserCard />
-                
+
                 <Flex
                     direction="column"
                     as="nav"
@@ -53,11 +56,11 @@ export default function Sidebar(props) {
                     />
 
 
-                    <MenuItem
+                    {authUser.is_affiliate == true && <MenuItem
                         icon={FaNetworkWired}
                         title='My Downline'
                         link='/user/my_downline'
-                    />
+                    />}
 
                     <MenuItem
                         icon={HiCollection}
@@ -75,12 +78,12 @@ export default function Sidebar(props) {
                         icon={HiCode}
                         title='Personals'
                         submenus={[
-                            { title: 'Member Sponsor List', link: '/user/personals/member_sponsor_list', show: true },
-                            { title: 'Retail Sponsor List', link: '/user/personals/retail_sponsor_list', show: true },
+                            { title: 'Member Sponsors', link: '/user/personals/member_sponsor', show: true },
+                            { title: 'Retail Sponsors', link: '/user/personals/retail_sponsor', show: true },
                         ]}
                     />
 
-                    <MenuItem
+                    {authUser.is_affiliate == true && <MenuItem
                         icon={FaMoneyBill}
                         title='Commissions'
                         submenus={[
@@ -89,7 +92,7 @@ export default function Sidebar(props) {
                             { title: 'Matrix Match', link: '/user/commissions/matrix_match', show: true },
                             { title: 'All Commissions', link: '/user/commissions/all', show: true },
                         ]}
-                    />
+                    />}
 
                     <MenuItem
                         icon={BsCalendarEvent}

@@ -51,16 +51,22 @@ export default function username() {
 
 
     return (
-        <HomeLayout navBg='gray.800'>
-            <Center height={'100vh'} >
-                {loading
-                    ? <Spinner size={'xl'} />
-                    : <Box minW='xl'>
-                        <SponsorIdValidator />
-                    </Box>
-                }
+        <>
+            {loading
+                ? <Center height={'100vh'} >
+                    <Spinner size={'xl'} />
+                </Center>
+                : <HomeLayout navBg='gray.800'>
+                    <Center height={'100vh'} >
+                        <Box minW='xl'>
+                            <SponsorIdValidator />
+                        </Box>
+                    </Center>
+                </HomeLayout>
 
-            </Center>
-        </HomeLayout>
+            }
+
+        </>
+
     )
 }

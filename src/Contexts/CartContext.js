@@ -1,4 +1,5 @@
 import useAlert from "@/Hooks/useAlert";
+import usePrice from "@/Hooks/usePrice";
 import { useDisclosure } from "@chakra-ui/react";
 import { createContext, useEffect, useState } from "react"
 import { CartProvider, useCart } from "react-use-cart";
@@ -18,6 +19,8 @@ const CartContextProvider = ({ children }) => {
         removeItem,
     } = useCart();
 
+    const price = usePrice()
+
     const {success} = useAlert('top-right')
 
     useEffect(() => {
@@ -25,7 +28,7 @@ const CartContextProvider = ({ children }) => {
     }, [items])
 
     const addToCart = (item) => {
-        addItem(item)
+        addItem({...item, price: price(item).amount})
         success('Item added to cart', '')
         onOpen()
     }

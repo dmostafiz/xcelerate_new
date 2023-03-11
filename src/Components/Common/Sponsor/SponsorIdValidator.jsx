@@ -41,7 +41,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function SponsorIdValidator({redirectTo='/'}) {
+export default function SponsorIdValidator({shadow=true, redirectTo='/'}) {
   const { classes } = useStyles();
 
   const router = useRouter()
@@ -84,7 +84,7 @@ export default function SponsorIdValidator({redirectTo='/'}) {
         Enter the sponsor username who reffered you to the website.
       </Text>
 
-      <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
+      <Paper withBorder shadow={shadow?"md":"none" } p={30} radius="md" mt="xl">
         <TextInput
           label="Sponsor Username"
           placeholder="Enter valid sponsor username"

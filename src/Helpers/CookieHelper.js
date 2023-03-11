@@ -13,7 +13,7 @@ export function getRedirectUrl() {
 
     console.log('Get & remove Redirect URL: ', redirectUrl)
 
-    return redirectUrl || '/'
+    return redirectUrl || null
 }
 
 export function setAccessToken(token) {

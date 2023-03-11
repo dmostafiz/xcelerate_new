@@ -1,6 +1,6 @@
 import SafeArea from '@/Components/Common/Dashboard/SafeArea'
 import UserLayout from '@/layouts/UserLayout'
-import { Box, Flex, Link, Stack, chakra, Image, Grid, GridItem, SimpleGrid, Tabs, TabList, Tab, TabPanels, TabPanel, Button, Text, Heading, Center, VStack, useBreakpointValue, Divider } from '@chakra-ui/react'
+import { Box, Flex, Stack, chakra, Image, Grid, GridItem, SimpleGrid, Tabs, TabList, Tab, TabPanels, TabPanel, Button, Text, Heading, Center, VStack, useBreakpointValue, Divider, Icon } from '@chakra-ui/react'
 import { ActionIcon, CopyButton, Input, Tooltip } from '@mantine/core'
 import { IconBrandTwitter, IconCheck, IconCopy } from '@tabler/icons'
 import React from 'react'
@@ -12,6 +12,8 @@ import { ProductCard } from '@/Components/Common/Dashboard/Products/ProductCard'
 import useSWR from 'swr'
 import fetcher from '@/Helpers/fetcher'
 import useUser from '@/Hooks/useUser'
+import { MdCheckCircle } from 'react-icons/md'
+import Link from 'next/link'
 
 const PieChart = dynamic(() => import('@/Components/Common/Dashboard/Charts/PieChart'), { ssr: false })
 
@@ -19,7 +21,7 @@ export default function index() {
 
   const { data, error, isLoading, mutate } = useSWR('/shop/products', fetcher)
 
-  const {authUser} = useUser()
+  const { authUser } = useUser()
 
   return (
     <UserLayout
@@ -46,7 +48,11 @@ export default function index() {
           backdropBlur="5px"
         >
           <Flex>
-            <Image opacity={.8} display={{ base: 'none', md: 'inline-block' }} w='200px' src='/user_premium.png' />
+            {authUser?.is_member == false ?
+              <Image opacity={.8} display={{ base: 'none', md: 'inline-block' }} w='200px' src='/user_premium.png' />
+              : <Center p={5}>
+                <Icon fontSize={'180px'} as={MdCheckCircle} color='white' />
+              </Center>}
             <Box
               // w={{
               //   md: "3xl",
@@ -85,7 +91,9 @@ export default function index() {
                   color: "gray.100",
                 }}
               >
-                <chakra.span display="block">You are browsing our free plan!</chakra.span>
+                <chakra.span display="block">
+                  {authUser?.is_affiliate == true ? 'Your running on affiliate membership plan!' : authUser?.is_member == true ? "Your running on membership plan!" : 'You are browsing free plan as a retailer!'}
+                </chakra.span>
                 <chakra.span
                   display="block"
                   color="blackAlpha.700"
@@ -95,7 +103,7 @@ export default function index() {
                     color: "gray.500",
                   }}
                 >
-                  Upgrade account now and get full access to our commission system.
+                   {authUser?.is_affiliate == true ? 'Enjoy the affiliate membership plan with 50% - 70% discount on every product and with full access of our affiliate commission system.' : authUser?.is_member == true ? "Enjoy member only plan and get 50% - 70% discount on every product." : 'Upgrade your account now, and get full access to our affiliate commission system.'}
                 </chakra.span>
               </chakra.h2>
               <Stack
@@ -111,44 +119,30 @@ export default function index() {
                   lg: 0,
                 }}
               >
-                <Link
-                  w={["full", , "auto"]}
-                  display="inline-flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  px={3}
-                  py={2}
-                  border="solid transparent"
-                  fontWeight="bold"
-                  rounded="md"
-                  shadow="md"
-                  color='white'
-                  bg="blackAlpha.800"
-                // _hover={{
-                //   bg: "yellow.400",
-                // }}
-                >
-                  Upgrade Account
-                </Link>
-                <Link
-                  w={["full", , "auto"]}
-                  display="inline-flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  px={3}
-                  py={2}
-                  border="solid transparent"
-                  fontWeight="bold"
-                  rounded="md"
-                  shadow="md"
-                  color="brand.600"
-                  bg="white"
-                  _hover={{
-                    bg: "brand.50",
-                  }}
+                {authUser?.is_member == false ?
+                  <Link href={'/user/subscriptions'}>
+                    <Button
+                      colorScheme={'gray'}
+                    >
+                      Upgrade Account
+                    </Button>
+                  </Link>
+                  : <Link href={'/user/subscriptions'}>
+                    <Button
+                      bg={'green.400'}
+                    >
+                      View subscription details
+                    </Button>
+                  </Link>
+                }
+
+                <Button
+                  bg={'white'}
                 >
                   Learn More
-                </Link>
+                </Button>
+
+
               </Stack>
             </Box>
           </Flex>
@@ -157,7 +151,8 @@ export default function index() {
 
       <SafeArea>
         <SimpleGrid mb={{ base: 20, xl: 5 }} columns={{ base: 1, md: 1, lg: 2, xl: 3 }} spacing={5}>
-          <Box bg='white' shadow={'md'} minHeight='230px' rounded={'xl'}>
+
+          {authUser?.is_affiliate == true && <Box bg='white' shadow={'md'} minHeight='230px' rounded={'xl'}>
             <Tabs variant='line'>
               <TabList>
                 <Tab fontWeight={'bold'} _selected={{ color: 'teal', borderColor: 'teal' }} _active=''>
@@ -239,7 +234,7 @@ export default function index() {
                     </Button>
                   </Box>
 
-                  <Divider my={2}/>
+                  <Divider my={2} />
 
                   <Box>
                     <Text lineHeight={1} fontSize={'15px'} mb={1}>
@@ -253,8 +248,9 @@ export default function index() {
                 </TabPanel>
               </TabPanels>
             </Tabs>
-          </Box>
-          <Box bg='white' shadow={'md'} minHeight='230px' rounded={'xl'}>
+          </Box>}
+
+          {authUser?.is_affiliate == true && <Box bg='white' shadow={'md'} minHeight='230px' rounded={'xl'}>
             <Box px={4} py={3} borderBottom='2px' borderColor={'gray.200'}>
               <Heading as='h5' fontSize={'md'}>
                 Matrix <Text as='span' fontSize={'15px'} fontWeight='normal'>( Overall )</Text>
@@ -263,9 +259,9 @@ export default function index() {
             <Box px={4} py={4}>
               <PieChart />
             </Box>
-          </Box>
+          </Box>}
 
-          <Box bg='white' shadow={'md'} height='230px' rounded={'xl'}>
+          {authUser?.is_affiliate == true && <Box bg='white' shadow={'md'} height='230px' rounded={'xl'}>
             <Box bg='white' shadow={'md'} minHeight='230px' rounded={'xl'}>
               <Box px={4} py={3} borderBottom='2px' borderColor={'gray.200'}>
                 <Heading as='h5' fontSize={'md'}>
@@ -276,7 +272,7 @@ export default function index() {
                 <AreaChart />
               </Box>
             </Box>
-          </Box>
+          </Box>}
 
 
         </SimpleGrid>
@@ -384,7 +380,7 @@ export default function index() {
 
 
         <Flex direction={{ base: 'column', lg: 'row' }} gap={5} >
-          <Box flex={1} bg='white' shadow={'md'} minHeight='230px' rounded={'xl'} >
+          {authUser?.is_affiliate == true && <Box flex={1} bg='white' shadow={'md'} minHeight='230px' rounded={'xl'} >
             <Box px={4} py={3} borderBottom='2px' borderColor={'gray.200'}>
               <Heading as='h5' fontSize={'md'}>
                 Business Snapshot <Text as='span' fontSize={'15px'} fontWeight='normal'>( Overall )</Text>
@@ -467,8 +463,9 @@ export default function index() {
 
               </SimpleGrid>
             </Box>
-          </Box>
-          <Box w={{ base: '100%', lg: '60%', xl: '66%' }} bg='white' shadow={'md'} minH='230px' rounded={'xl'}>
+          </Box>}
+
+          <Box w={{ base: '100%', lg:  authUser?.is_affiliate == true ? '60%' : '100%', xl: authUser?.is_affiliate == true ? '66%'  : '100%' }} bg='white' shadow={'md'} minH='230px' rounded={'xl'}>
             <Box px={4} py={3} borderBottom='2px' borderColor={'gray.200'}>
               <Heading as='h5' fontSize={'md'}>
                 Best Sales <Text as='span' fontSize={'15px'} fontWeight='normal'>( Monthly )</Text>

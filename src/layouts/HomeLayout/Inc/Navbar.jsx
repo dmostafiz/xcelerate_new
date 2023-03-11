@@ -6,7 +6,12 @@ export default function Navbar() {
         <ul className="navbar-nav">
             <li>
                 <Link href={'/auth/user_login'}>
-                    <div className="nav-link login-btn">USER LOGIN</div>
+                    <div className="nav-link login-btn">LOGIN</div>
+                </Link>
+            </li>
+            <li>
+                <Link href={'/auth/create_account'}>
+                    <div className="nav-link login-btn">ACCOUNT</div>
                 </Link>
             </li>
             <li><a className="nav-link buy-btn" href="#productDiv">BUY NOW</a></li>

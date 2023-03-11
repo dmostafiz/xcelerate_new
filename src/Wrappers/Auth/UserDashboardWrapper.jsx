@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import ComponentLoader from '@/Components/ComponentLoader'
 import useUser from '@/Hooks/useUser'
-import { removeAccessToken } from '@/Helpers/CookieHelper'
+import { removeAccessToken, setRedirectUrl } from '@/Helpers/CookieHelper'
 
 export default function UserDashboardWrapper({ children }) {
     const router = useRouter()
@@ -11,8 +11,10 @@ export default function UserDashboardWrapper({ children }) {
 
     if (!isLoading && !authUser || (authUser && authUser.user_type != 'user')) {
         removeAccessToken()
+        setRedirectUrl(router.asPath)
         router.push('/auth/user_login')
     }
+
 
     return (
         <>

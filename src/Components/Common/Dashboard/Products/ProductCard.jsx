@@ -1,6 +1,8 @@
+import MemberPriceHoverCard from '@/Components/UserDashboard/Product/MemberPriceHoverCard';
 import { CartContext } from '@/Contexts/CartContext';
-import { Box, Button, Flex, Image } from '@chakra-ui/react';
-import { Card, Text, Group, Badge, createStyles, Center } from '@mantine/core';
+import usePrice from '@/Hooks/usePrice';
+import { Box, Button, Flex, Image, Text, Tooltip } from '@chakra-ui/react';
+import { Card, Group, Badge, createStyles, Center } from '@mantine/core';
 import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons';
 import { useContext } from 'react';
 
@@ -46,10 +48,12 @@ const mockdata = [
     { label: 'Electric', icon: IconGasStation },
 ];
 
-export function ProductCard({ product, description=true }) {
+export function ProductCard({ product, description = true }) {
     const { classes } = useStyles();
 
     const { addToCart } = useContext(CartContext)
+
+    const price = usePrice()
 
     const features = mockdata.map((feature) => (
         <Center key={feature.label}>
@@ -70,7 +74,7 @@ export function ProductCard({ product, description=true }) {
             <Box textAlign={'center'} py={3}>
                 <Text lineClamp={1} weight={500}>{product?.name}</Text>
                 {description && <Text
-                    size="xs"
+                    fontSize="sm"
                     color="dimmed"
                     dangerouslySetInnerHTML={{ __html: product?.description }}
                 >
@@ -92,15 +96,54 @@ export function ProductCard({ product, description=true }) {
             <Card.Section className={classes.section}>
                 <Flex alignItems={'center'} justify={'space-between'} spacing={30} w='100%'>
                     <div>
-                        <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
-                            ${product?.price}
-                        </Text>
+                        {price(product).is_member ? <>
+                            <Tooltip label='Regular Price'>
+                                <Text
+                                    fontSize="xs"
+                                    color="red.400"
+                                    // title='Regular price'
+                                    as='s'
+                                    fontWeight={'thin'}
+                                >
+                                    Regular Price: ${price(product).default_amount}
+                                </Text>
+                            </Tooltip>
+
+                            <Tooltip label='Membership Price'>
+                                <Text fontSize="lg" fontWeight={'semibold'}>
+                                    ${price(product).amount}
+                                </Text>
+                            </Tooltip>
+
+                        </>
+                            : <>
+
+                                <MemberPriceHoverCard product={product}>
+                                    <Text
+                                        fontSize="xs"
+                                        color="teal.400"
+                                        // title='Regular price'
+                                        // as='s'
+                                        fontWeight={'thin'}
+                                    >
+                                        Member Price: ${price(product).member_price}
+                                    </Text>
+                                </MemberPriceHoverCard>
+
+                                <Tooltip label='Regular Price'>
+                                    <Text fontSize="lg" fontWeight={600} sx={{ lineHeight: 1 }}>
+                                        ${price(product).amount}
+                                    </Text>
+                                </Tooltip>
+                            </>
+
+                        }
                         {/* <Text size="sm" color="dimmed" weight={500} sx={{ lineHeight: 1 }} mt={3}>
                             per day
                         </Text> */}
                     </div>
 
-                    <Button float={'right'} size={'sm'} colorScheme={'yellow'} rounded="full" onClick={() => {addToCart(product)}}>
+                    <Button float={'right'} size={'sm'} colorScheme={'yellow'} rounded="full" onClick={() => { addToCart(product) }}>
                         Add to cart
                     </Button>
                 </Flex>

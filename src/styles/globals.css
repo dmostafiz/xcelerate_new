@@ -15,3 +15,8 @@
  .apexcharts-toolbar{
     display: none !important;
  }
+
+ input:-internal-autofill-selected {
+    background-color: transparent !important;
+
+}
