@@ -12,6 +12,7 @@ import useSWR from 'swr'
 import SafeArea from '@/Components/Common/Dashboard/SafeArea'
 import { ProductCard } from '@/Components/Common/Dashboard/Products/ProductCard'
 import { CartContext } from '@/Contexts/CartContext'
+import ComponentLoader from '@/Components/ComponentLoader'
 
 export default function shop() {
 
@@ -41,16 +42,19 @@ export default function shop() {
           </CardHeader>
           <CardBody>
 
-            {data?.products?.length ?
+            {!isLoading && data?.products?.length ?
 
-              <SimpleGrid columns={{base: 1, sm: 2, md: 2, xl:4}} gap={3}>
+              <SimpleGrid columns={{ base: 1, sm: 2, md: 2, xl: 4 }} gap={3}>
                 {data?.products?.map((product, i) => <Box key={i}>
-                  <ProductCard product={product} description={false}/>
+                  <ProductCard product={product} description={false} />
                 </Box>)}
 
               </SimpleGrid>
-
-              : <Text>No data found</Text>}
+              
+              : isLoading
+                ? <ComponentLoader />
+                : <Text>No data found</Text>
+            }
 
           </CardBody>
         </Card>
