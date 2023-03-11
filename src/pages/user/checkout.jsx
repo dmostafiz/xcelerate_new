@@ -69,8 +69,8 @@ export default function checkout() {
 
     useEffect(() => {
 
-        if(shipping?.data?.address?.id && shipping?.data?.address?.country == 'US'){
-            
+        if (shipping?.data?.address?.id && shipping?.data?.address?.country == 'US') {
+
             const state = usStates.find(state => state.name == shipping?.data?.address?.state)
 
             console.log('Get State: ', state?.abbreviation)
@@ -80,8 +80,8 @@ export default function checkout() {
 
             setTaxRate((taxRate * 100).toFixed(2))
             setTax(taxRate * parseFloat(cartTotal))
-            
-        }else{
+
+        } else {
             setTax(0)
         }
 
@@ -138,9 +138,9 @@ export default function checkout() {
                                         <Text>Zip Code: {shipping?.data?.address?.zip_code}</Text>
                                     </Wrap>
                                 </Box>
-                                    : !shipping.isLoading && !shipping?.data?.address
-                                        ? <NoDataFound center={false} py={5} text='No shipping address added' />
-                                        : <ComponentLoader />
+                                    : !shipping.isLoading
+                                        ? <ComponentLoader />
+                                        : <NoDataFound center={false} py={5} text='No shipping address added' />
                                 }
 
 
@@ -192,8 +192,8 @@ export default function checkout() {
                                 </Box>
                                 <Box py={4}>
                                     <Link href='/user/shop'>
-                                        <Button leftIcon={<Icon as={BsBag} />}  rounded='none' size={'sm'}>
-                                            Continue Shopping 
+                                        <Button leftIcon={<Icon as={BsBag} />} rounded='none' size={'sm'}>
+                                            Continue Shopping
                                         </Button>
                                     </Link>
                                 </Box>
